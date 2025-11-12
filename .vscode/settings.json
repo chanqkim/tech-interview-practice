@@ -1,0 +1,42 @@
+{
+    // Python
+    "python.terminal.activateEnvironment": true,
+    "python.formatting.provider": "black", // Use Black as Python formatter
+    "python.linting.enabled": true,
+    "python.linting.ruffEnabled": true, // Use Ruff for linting
+    "python.linting.ruffArgs": [
+        "--fix",
+        "--select",
+        "E,F,W,B,C90",
+        "--ignore",
+        "E501"
+    ],
+    "python.sortImports.args": [
+        "--profile",
+        "black"
+    ],
+    // Auto actions on save
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "sqlfluff.dialect": "mysql",
+    "sqlfluff.format.enabled": true,
+    "sqlfluff.format.arguments": [
+        "--fix-even-unparsable"
+    ],
+    "sqlfluff.executablePath": "${workspaceFolder}/.venv/bin/sqlfluff",
+    "sqlfluff.experimental.format.executeInTerminal": true,
+    "sqlfluff.linter.run": "onSave",
+    "sqlfluff.linter.lintEntireProject": true,
+    "files.associations": {
+        "*.sql": "sql"
+    },
+    // Python projects (venv)
+    "python-envs.pythonProjects": [
+        {
+            "envManager": "ms-python.python:venv",
+            "packageManager": "ms-python.python:pip"
+        }
+    ]
+}
