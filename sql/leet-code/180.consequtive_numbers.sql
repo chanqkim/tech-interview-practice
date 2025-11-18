@@ -61,6 +61,7 @@ where
 # additional question1: select num that has n or larger number of cunsecutive times.
 WITH step1 AS (
     SELECT
+        id,
         num,
         # check whether num is consequtive
         CASE WHEN num = LAG(num) OVER (ORDER BY id) THEN 0 ELSE 1 END AS is_break 
@@ -68,6 +69,7 @@ WITH step1 AS (
 ),
 step2 AS (
     SELECT
+        id,
         num,
         SUM(is_break) OVER (ORDER BY id) AS run_id
     FROM step1
@@ -85,6 +87,7 @@ WHERE run_id IN (SELECT run_id FROM step3);
 # additional question2: select num that has n or larger number of cunsecutive times.
 WITH step1 AS (
     SELECT
+        id,
         num,
         -- check whether num is part of a consecutively increasing sequence
         CASE WHEN num + 1 = LAG(num) OVER (ORDER BY id) THEN 0 ELSE 1 END AS is_break 
@@ -92,6 +95,7 @@ WITH step1 AS (
 ),
 step2 AS (
     SELECT
+        id,
         num,
         SUM(is_break) OVER (ORDER BY id) AS run_id
     FROM step1
