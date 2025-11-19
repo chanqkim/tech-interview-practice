@@ -37,4 +37,4 @@ WITH ranked_salary
          FROM   employee)
 SELECT Max(salary) AS SecondHighestSalary
 FROM   ranked_salary
-WHERE  sal_rank = 2 
+WHERE  sal_rank = n 
