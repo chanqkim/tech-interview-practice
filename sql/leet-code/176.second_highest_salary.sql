@@ -1,5 +1,6 @@
--- https://leetcode.com/problems/second-highest-salary/description/
 /*--
+link: https://leetcode.com/problems/second-highest-salary/description/
+
 +-------------+------+
 | Column Name | Type |
 +-------------+------+
@@ -13,15 +14,19 @@ Employee table.
 If there is no second highest salary, return null (return None in Pandas).
 --*/
 
-# 1. simple solution, https://leetcode.com/problems/second-highest-salary/solutions/6624774/unlock-the-secret-sql-trick-to-instantly-2gz4/
- (
- SELECT DISTINCT salary
- FROM            employee
- ORDER BY        salary DESC
- LIMIT           1
- offset          1 )
-as
-  SecondHighestSalary
+# 1. simple solution, 
+# https://leetcode.com/problems/second-highest-salary/solutions/6624774/unlock-the-secret-sql-trick-to-instantly-2gz4/
+(
+SELECT 
+    DISTINCT salary 
+  FROM 
+    employee 
+  ORDER BY 
+    salary DESC 
+  LIMIT 
+    1 offset 1
+) as SecondHighestSalary
+
 
 # 2. scalable solution (works for any "nth" highest salary)
 WITH ranked_salary

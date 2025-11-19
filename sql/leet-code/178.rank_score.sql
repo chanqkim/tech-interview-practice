@@ -1,4 +1,6 @@
 /*--
+link: https://leetcode.com/problems/rank-scores/description/ 
+
 Table: Scores
 +-------------+---------+
 | Column Name | Type    |
