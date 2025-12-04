@@ -122,5 +122,14 @@ class Linked_List:
             prev = current  # move prev to current
             current = next_temp  # move current to next node
 
-    def list_length():
-        pass
+    # return length of linked list
+    def list_length(self):
+        current = self.head
+        list_length = 0
+
+        # traverse linked list and count nodes
+        while current is not None:
+            list_length += 1
+            current = current.next
+
+        return list_length
