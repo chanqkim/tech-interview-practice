@@ -106,8 +106,21 @@ class Linked_List:
                 current = current.next  # Move to the next node
                 current_index += 1  # Increment index counter
 
-    def reverse_list():
-        pass
+    def reverse_list(self):
+        current = self.head
+
+        # if node is one, return linked_list
+        if current.next is None:
+            return
+
+        # prev: previous node pointer, current: current node pointer, next_temp: next node pointer
+        prev = None
+
+        while current.next is not None:
+            next_temp = current.next  # store next node
+            current.next = prev  # reverse the pointer
+            prev = current  # move prev to current
+            current = next_temp  # move current to next node
 
     def list_length():
         pass
