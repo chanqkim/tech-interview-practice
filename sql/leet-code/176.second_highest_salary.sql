@@ -1,21 +1,8 @@
 /*--
 link: https://leetcode.com/problems/second-highest-salary/description/
 
-+-------------+------+
-| Column Name | Type |
-+-------------+------+
-| id          | int  |
-| salary      | int  |
-+-------------+------+
-id is the primary key (column with unique values) for this table.
-Each row of this table contains information about the salary of an employee.
-Write a solution to find the second highest distinct salary from 
-Employee table.
-If there is no second highest salary, return null (return None in Pandas).
---*/
-
 # 1. simple solution, 
-# https://leetcode.com/problems/second-highest-salary/solutions/6624774/unlock-the-secret-sql-trick-to-instantly-2gz4/
+--*/
 (
 SELECT 
     DISTINCT salary 
