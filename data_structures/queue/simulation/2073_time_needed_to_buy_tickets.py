@@ -1,7 +1,5 @@
 """
 link: https://leetcode.com/problems/time-needed-to-buy-tickets/description/?envType=problem-list-v2&envId=dsa-sequence-valley-queue
-
-
 """
 
 from collections import deque
@@ -45,3 +43,23 @@ class Solution1:
 
         # Return the total time until person k finishes buying tickets
         return answer
+
+
+# Counting Approach
+# Time Complexity: O(n)
+#   - Single pass through the tickets list
+# Space Complexity: O(1)
+class Solution2:
+    def timeRequiredToBuy(self, tickets: List[int], k: int) -> int:
+        time = 0
+        target = tickets[k]
+
+        for i in range(len(tickets)):
+            if i <= k:
+                # People before or at k can buy up to `target` tickets
+                time += min(tickets[i], target)
+            else:
+                # People after k cannot buy on k's last turn
+                time += min(tickets[i], target - 1)
+
+        return time
