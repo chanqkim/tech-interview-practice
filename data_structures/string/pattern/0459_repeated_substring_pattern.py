@@ -23,3 +23,15 @@ class Solution:
             if substr * substr_cnt == s:
                 return True
         return False
+
+
+# Optimal solution
+# time: O(n) space: O(n)
+# time analysis: The string concatenation and substring search operations can be performed in linear time using
+# efficient string matching algorithms, leading to an overall time complexity of O(n).
+# space analysis: The space complexity is O(n) due to the storage of the concatenated
+class Solution2:
+    def repeatedSubstringPattern(self, s: str) -> bool:
+        # create a new string by concatenating s with itself and removing the first and last characters to avoid original string match
+        ss = (s + s)[1:-1]
+        return s in ss
