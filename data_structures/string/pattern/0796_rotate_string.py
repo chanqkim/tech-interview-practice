@@ -1,5 +1,13 @@
 """
 link: https://leetcode.com/problems/rotate-string/?envType=problem-list-v2&envId=dsa-sequence-valley-string-matching
+
+# checklist
+1. do string needs to be "moved" one by one?
+- or can it be converted to a whole set?
+2. can all results fit in one big string?
+- if YES -> s + s
+3. is the final check just "inclusion"?
+- goal in s+s
 """
 
 
@@ -27,3 +35,21 @@ class Solution:
             cnt -= 1
         # if no rotation matches goal, return False
         return False
+
+
+# Optimal solution
+# time: O(n) space: O(n)
+# time analysis: The string concatenation and substring search operations can be performed in linear time using
+# efficient string matching algorithms, leading to an overall time complexity of O(n).
+# space analysis: The space complexity is O(n) due to the storage of the concatenated
+class Solution2:
+    def rotateString(self, s: str, goal: str) -> bool:
+        # if lengths differ, cannot be rotations
+        if len(s) != len(goal):
+            return False
+
+        # concatenate s with itself
+        ss = s + s
+
+        # check if goal is a substring of ss
+        return goal in ss
