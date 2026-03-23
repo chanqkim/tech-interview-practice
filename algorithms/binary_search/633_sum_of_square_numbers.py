@@ -42,3 +42,31 @@ class Solution:
 
         # if no value satisfies a^2 + b^2 = c, return False
         return False
+
+
+# solution 2: using two pointers
+# time: O(sqrt(c)) space: O(1)
+# time analysis: iterating through possible values of a takes O(sqrt(c)) time, and for each a, we can check if b^2 is a perfect square in O(1) time using two pointers → O(sqrt(c))
+# space analysis: using only a constant amount of extra space → O(1)
+class Solution2:
+    def judgeSquareSum(self, c: int) -> bool:
+        # initialize two pointers: left starts at 0 and right starts at sqrt(c)
+        left = 0
+        right = int(math.sqrt(c))
+
+        # use two pointers to find if there exist a and b such that a^2 + b^2 = c
+        while left <= right:
+            # cur = a^2 + b^2
+            cur = left * left + right * right
+
+            # if cur equals c, return True
+            if cur == c:
+                return True
+            # if a^2 + b^2 is less than c, increase a left pointer by 1 
+            elif cur < c:
+                left += 1
+            # if a^2 + b^2 is greater than c, decrease the right pointer by 1
+            else:
+                right -= 1
+        # if no value satisfies a^2 + b^2 = c, return False
+        return False
