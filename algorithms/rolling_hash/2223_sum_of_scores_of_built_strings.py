@@ -39,3 +39,43 @@ class Solution:
                 total_score += i + 1
 
         return total_score % MOD
+
+# using rolling hash + binary search
+# time: O(n log n) space: O(n)
+# time analysis: O(n) to compute the rolling hashes + O(n log n) for each prefix, we do a binary search to find the longest common prefix → O(n log n)
+# space analysis: O(n) for the hash and power arrays
+class Solution2:
+    def sumScores(self, s: str) -> int:
+        n = len(s)
+        mod = 10**9 + 7
+        base = 31
+        
+        # hash and power arrays for rolling hash
+        h = [0] * (n + 1)
+        p = [1] * (n + 1)
+
+        # looop to compute the rolling hash values and powers of the base
+        for i in range(n):
+            h[i+1] = (h[i] * base + (ord(s[i]) - ord('a') + 1)) % mod
+            p[i+1] = (p[i] * base) % mod
+
+        # return the hash of the substring s[l:r] using the precomputed hash and power arrays   
+        def get_hash(l, r): 
+            return (h[r] - h[l] * p[r-l]) % mod
+        
+        total_score = 0
+        for i in range(n):
+            # use binary search to find LCP length between prefix s[0:i] and suffix s[i:n]
+            low, high = 1, n - i
+            lcp = 0
+            while low <= high:
+                mid = (low + high) // 2
+                # compare the hash of the prefix s[0:mid] with the hash of the suffix s[i:i+mid]
+                if get_hash(0, mid) == get_hash(i, i + mid):
+                    lcp = mid
+                    low = mid + 1
+                else:
+                    high = mid - 1
+            total_score += lcp
+            
+        return total_score
