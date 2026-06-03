@@ -1,0 +1,54 @@
+'''
+link: https://leetcode.com/problems/restore-ip-addresses/description/?envType=problem-list-v2&envId=dsa-recursion-maze-backtracking
+'''
+
+# time O(1) space: 0(1)
+# time analysis: O(1) because the number of valid IP addresses that can be formed from a string of digits is limited (at most 2^32 - 1), and the backtracking algorithm will explore a constant number of possibilities due to the fixed structure of IP addresses (4 segments, each between 0 and 255)
+# space analysis: O(1) because the maximum depth of the recursion is limited to 4 (the number of segments in an IP address)
+class Solution:
+    def restoreIpAddresses(self, s: str):
+        result = []
+        path = []
+
+        # define a backtracking function that takes the current index in the string as an argument, and recursively builds valid IP address segments by checking for leading zeros and segment value limits, adding valid segments to the path and exploring further until 4 segments are formed, at which point it checks if the entire string has been used and adds the valid IP address to the result list
+        def backtrack(index):
+
+            # IP must have 4 segemnts
+            if len(path) == 4:
+
+                # Check if the entire string has been used
+                if index == len(s):
+                    result.append(".".join(path))
+
+                return
+
+            # loop through possible segment lengths (1 to 3 characters) and check for validity before adding to the path and recursing further
+            for length in range(1, 4):
+
+                # if segment lengths > remaining characters, break the loop to avoid unnecessary checks
+                if index + length > len(s):
+                    break
+
+                # extract the current segment from the string using the current index and segment length
+                part = s[index:index + length]
+
+                # check for leading zeroes (invalid segment if it starts with '0' and has more than one character)
+                if len(part) > 1 and part[0] == "0":
+                    continue
+
+                # check for segment value limits (0-255)
+                if int(part) > 255:
+                    continue
+
+                # add valid segment to the path
+                path.append(part)
+
+                # recursively call backtrack with the next index after the current segment
+                backtrack(index + length)
+
+                # backtrack by removing the last segment added to the path, allowing the function to explore other segment combinations
+                path.pop()
+
+        backtrack(0)
+
+        return result
